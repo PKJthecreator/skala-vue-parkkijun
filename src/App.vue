@@ -22,8 +22,8 @@ import ModelBasic from './components/practices/basic/ModelBasic.vue'
 import ModelModifier from './components/practices/basic/ModelModifier.vue'
 import ModelForm from './components/practices/basic/ModelForm.vue'
 import StyleScoped from './components/practices/basic/StyleScoped.vue'
-import WeatherMockup from './components/practices/basic/WeatherMockup.vue'
-import GradeMockup from './components/practices/basic/GradeMockup.vue'
+import WeatherMockup from './components/practices/basic/과제 1/WeatherMockup.vue'
+import GradeMockup from './components/practices/basic/과제 1/GradeMockup.vue'
 </script>
 
 <template>
