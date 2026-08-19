@@ -26,6 +26,12 @@ import WeatherMockup from './components/practices/basic/과제 1/WeatherMockup.v
 import GradeMockup from './components/practices/basic/과제 1/GradeMockup.vue'
 import ReactiveRef from './components/practices/composition/ReactiveRef.vue'
 import ReactiveReactive from './components/practices/composition/ReactiveReactive.vue'
+import ComputedBasic from './components/practices/composition/ComputedBasic.vue'
+import WatchersBasic from './components/practices/composition/WatchersBasic.vue'
+import WatchersDeep from './components/practices/composition/WatchersDeep.vue'
+import WatchersMulti from './components/practices/composition/WatchersMulti.vue'
+import WatchersReactive from './components/practices/composition/WatchersReactive.vue'
+import WatchersWatchEffect from './components/practices/composition/WatchersWatchEffect.vue'
 </script>
 
 <template>
@@ -92,6 +98,18 @@ import ReactiveReactive from './components/practices/composition/ReactiveReactiv
     <ReactiveRef />
     <hr />
     <ReactiveReactive />
+    <hr />
+    <ComputedBasic />
+    <hr />
+    <WatchersBasic />
+    <hr />
+    <WatchersDeep />
+    <hr />
+    <WatchersMulti />
+    <hr />
+    <WatchersReactive />
+    <hr />
+    <WatchersWatchEffect />
   </div>
 </template>
 
