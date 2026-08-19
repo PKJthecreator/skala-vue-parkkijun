@@ -24,6 +24,8 @@ import ModelForm from './components/practices/basic/ModelForm.vue'
 import StyleScoped from './components/practices/basic/StyleScoped.vue'
 import WeatherMockup from './components/practices/basic/과제 1/WeatherMockup.vue'
 import GradeMockup from './components/practices/basic/과제 1/GradeMockup.vue'
+import ReactiveRef from './components/practices/composition/ReactiveRef.vue'
+import ReactiveReactive from './components/practices/composition/ReactiveReactive.vue'
 </script>
 
 <template>
@@ -86,6 +88,10 @@ import GradeMockup from './components/practices/basic/과제 1/GradeMockup.vue'
       <hr class="assignment-divider" />
       <GradeMockup />
     </section>
+
+    <ReactiveRef />
+    <hr />
+    <ReactiveReactive />
   </div>
 </template>
 
