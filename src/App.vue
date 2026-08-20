@@ -33,6 +33,13 @@ import WatchersMulti from './components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from './components/practices/composition/WatchersReactive.vue'
 import WatchersWatchEffect from './components/practices/composition/WatchersWatchEffect.vue'
 import WeatherComposition from './components/practices/composition/과제2/WeatherComposition.vue'
+import LifecycleParent from './components/practices/component/LifecycleParent.vue'
+import PropsEmitsParent from './components/practices/component/PropsEmitsParent.vue'
+import ParentComponent1 from './components/practices/component/ParentComponent1.vue'
+import SlotDefaultParent from './components/practices/component/SlotDefaultParent.vue'
+import SlotNamedParent from './components/practices/component/SlotNamedParent.vue'
+import SlotScopedParent from './components/practices/component/SlotScopedparent.vue'
+import WeatherParent from './components/practices/component/과제3/WeatherParent.vue'
 </script>
 
 <template>
@@ -116,6 +123,24 @@ import WeatherComposition from './components/practices/composition/과제2/Weath
       <h1 class="assignment-title">과제2: 날씨 Composition API</h1>
       <hr class="assignment-divider" />
       <WeatherComposition />
+    </section>
+
+    <hr />
+    <LifecycleParent />
+    <hr />
+    <PropsEmitsParent />
+    <ParentComponent1 />
+    <hr />
+    <SlotDefaultParent />
+    <hr />
+    <SlotNamedParent />
+    <hr />
+    <SlotScopedParent />
+
+    <section class="assignment-block">
+      <h1 class="assignment-title">과제3: 날씨 컴포넌트 분리</h1>
+      <hr class="assignment-divider" />
+      <WeatherParent />
     </section>
   </div>
 </template>
