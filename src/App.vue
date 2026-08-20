@@ -22,8 +22,8 @@ import ModelBasic from './components/practices/basic/ModelBasic.vue'
 import ModelModifier from './components/practices/basic/ModelModifier.vue'
 import ModelForm from './components/practices/basic/ModelForm.vue'
 import StyleScoped from './components/practices/basic/StyleScoped.vue'
-import WeatherMockup from './components/practices/basic/과제 1/WeatherMockup.vue'
-import GradeMockup from './components/practices/basic/과제 1/GradeMockup.vue'
+import WeatherMockup from './components/exercise/과제1/WeatherMockup.vue'
+import GradeMockup from './components/exercise/과제1/GradeMockup.vue'
 import ReactiveRef from './components/practices/composition/ReactiveRef.vue'
 import ReactiveReactive from './components/practices/composition/ReactiveReactive.vue'
 import ComputedBasic from './components/practices/composition/ComputedBasic.vue'
@@ -32,7 +32,7 @@ import WatchersDeep from './components/practices/composition/WatchersDeep.vue'
 import WatchersMulti from './components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from './components/practices/composition/WatchersReactive.vue'
 import WatchersWatchEffect from './components/practices/composition/WatchersWatchEffect.vue'
-import WeatherComposition from './components/practices/composition/과제2/WeatherComposition.vue'
+import WeatherComposition from './components/exercise/과제2/WeatherComposition.vue'
 import LifecycleParent from './components/practices/component/LifecycleParent.vue'
 import PropsEmitsParent from './components/practices/component/PropsEmitsParent.vue'
 import ParentComponent1 from './components/practices/component/ParentComponent1.vue'
@@ -40,7 +40,7 @@ import ParentComponent2 from './components/practices/component/ParentComponent2.
 import SlotDefaultParent from './components/practices/component/SlotDefaultParent.vue'
 import SlotNamedParent from './components/practices/component/SlotNamedParent.vue'
 import SlotScopedParent from './components/practices/component/SlotScopedparent.vue'
-import WeatherParent from './components/practices/component/과제3/WeatherParent.vue'
+import WeatherParent from './components/exercise/과제3/WeatherParent.vue'
 </script>
 
 <template>
@@ -145,6 +145,17 @@ import WeatherParent from './components/practices/component/과제3/WeatherParen
       <hr class="assignment-divider" />
       <WeatherParent />
     </section>
+
+    <section class="assignment-block">
+      <h1 class="assignment-title">과제4: 날씨 Router (Vue Router)</h1>
+      <hr class="assignment-divider" />
+      <nav class="weather-nav">
+        <RouterLink to="/">날씨 대시보드</RouterLink>
+        <RouterLink to="/about">서비스 소개</RouterLink>
+        <RouterLink to="/stats">통계</RouterLink>
+      </nav>
+      <RouterView />
+    </section>
   </div>
 </template>
 
@@ -169,5 +180,30 @@ import WeatherParent from './components/practices/component/과제3/WeatherParen
   border: none;
   border-top: 4px solid #333;
   margin: 0 0 24px;
+}
+
+.weather-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.weather-nav a {
+  padding: 8px 16px;
+  border: 1px solid #ccd6e6;
+  border-radius: 6px;
+  color: #2b4a7a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.weather-nav a:hover {
+  background-color: #f5f8fd;
+}
+
+.weather-nav a.router-link-exact-active {
+  background-color: #0984e3;
+  border-color: #0984e3;
+  color: #fff;
 }
 </style>
