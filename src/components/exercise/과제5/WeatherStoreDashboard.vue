@@ -88,12 +88,12 @@ const closeDetail = () => {
         <SearchBar :query="searchQuery" @update-query="updateQuery" />
       </BaseDashboardCard>
 
-      <DetailPanel :city-item="detailCity" @close="closeDetail" />
+      <DetailPanel :city="detailCity" @close="closeDetail" />
 
       <BaseDashboardCard icon="🗺️" :title="listTitle">
         <p v-if="filteredWeatherList.length === 0" class="empty-message">😢 검색 결과와 일치하는 도시가 없습니다.</p>
         <div v-else class="weather-cards">
-          <WeatherCard v-for="city in filteredWeatherList" :key="city.id" :city-item="city" @select-card="selectCity" @click-detail="showDetail" />
+          <WeatherCard v-for="city in filteredWeatherList" :key="city.id" :city="city" @select-card="selectCity" @click-detail="showDetail" />
         </div>
       </BaseDashboardCard>
 

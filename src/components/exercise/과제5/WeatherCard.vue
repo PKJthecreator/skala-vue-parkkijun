@@ -1,11 +1,11 @@
 <script setup>
-// 과제5: 원본 섭씨 데이터(cityItem)만 받고, 표시 단위는 카드가 스스로 configStore를 보고 계산한다.
+// 과제5: 원본 섭씨 데이터(city)만 받고, 표시 단위는 카드가 스스로 configStore를 보고 계산한다.
 import { computed } from 'vue'
 import { useConfigStore } from '@/stores/configStore.js'
 import { useFavoriteStore } from '@/stores/favoriteStore.js'
 
 const props = defineProps({
-  cityItem: {
+  city: {
     type: Object,
     required: true,
   },
@@ -18,31 +18,31 @@ const favoriteStore = useFavoriteStore()
 
 // 요구사항 예시 코드와 동일한 패턴: configStore.unit에 따라 원본 섭씨 데이터를 변환
 const displayTemp = computed(() => {
-  const rawTemp = props.cityItem.temp
+  const rawTemp = props.city.temp
   if (configStore.unit === 'fahrenheit') {
     return Math.round((rawTemp * 9) / 5 + 32)
   }
   return rawTemp
 })
 
-const isFavorite = computed(() => favoriteStore.isFavorite(props.cityItem.id))
+const isFavorite = computed(() => favoriteStore.isFavorite(props.city.id))
 </script>
 
 <template>
-  <div class="weather-card" @click="emit('select-card', cityItem)">
+  <div class="weather-card" @click="emit('select-card', city)">
     <div class="city-info">
       <p class="city-name">
-        <button class="favorite-btn" :class="{ active: isFavorite }" @click.stop="favoriteStore.toggleFavorite(cityItem.id)">
+        <button class="favorite-btn" :class="{ active: isFavorite }" @click.stop="favoriteStore.toggleFavorite(city.id)">
           {{ isFavorite ? '⭐' : '☆' }}
         </button>
-        {{ cityItem.name }} ({{ cityItem.status }})
+        {{ city.name }} ({{ city.status }})
       </p>
       <p class="city-temp">현재 기온: {{ displayTemp }}{{ configStore.unitSymbol }}</p>
-      <span v-if="cityItem.temp >= 35" class="badge badge-hot">🔥 더움 (35도이상)</span>
-      <span v-else-if="cityItem.temp < 25" class="badge badge-cool">❄️ 선선함 (25도미만)</span>
+      <span v-if="city.temp >= 35" class="badge badge-hot">🔥 더움 (35도이상)</span>
+      <span v-else-if="city.temp < 25" class="badge badge-cool">❄️ 선선함 (25도미만)</span>
       <span v-else class="badge badge-normal">🙂 보통 (25~34도)</span>
     </div>
-    <button class="detail-btn" @click.stop="emit('click-detail', cityItem)">상세보기</button>
+    <button class="detail-btn" @click.stop="emit('click-detail', city)">상세보기</button>
   </div>
 </template>
 

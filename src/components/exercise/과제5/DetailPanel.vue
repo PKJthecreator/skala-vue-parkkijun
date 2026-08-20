@@ -5,7 +5,7 @@ import { computed } from 'vue'
 import { useConfigStore } from '@/stores/configStore.js'
 
 const props = defineProps({
-  cityItem: {
+  city: {
     type: Object,
     default: null,
   },
@@ -16,8 +16,8 @@ defineEmits(['close'])
 const configStore = useConfigStore()
 
 const displayTemp = computed(() => {
-  if (!props.cityItem) return null
-  const rawTemp = props.cityItem.temp
+  if (!props.city) return null
+  const rawTemp = props.city.temp
   if (configStore.unit === 'fahrenheit') {
     return Math.round((rawTemp * 9) / 5 + 32)
   }
@@ -26,22 +26,22 @@ const displayTemp = computed(() => {
 </script>
 
 <template>
-  <div v-if="cityItem" class="detail-panel">
+  <div v-if="city" class="detail-panel">
     <div class="detail-header">
-      <h4>📡 {{ cityItem.name }} 상세 기상 정보</h4>
+      <h4>📡 {{ city.name }} 상세 기상 정보</h4>
       <button class="close-btn" @click="$emit('close')">닫기</button>
     </div>
     <p>
       🌡️ 실시간 기온: <strong>{{ displayTemp }}{{ configStore.unitSymbol }}</strong>
     </p>
     <p>
-      ☁️ 기상 현황: <strong>{{ cityItem.status }}</strong>
+      ☁️ 기상 현황: <strong>{{ city.status }}</strong>
     </p>
     <p>
-      💧 대기 습도: <strong>{{ cityItem.humidity }}%</strong>
+      💧 대기 습도: <strong>{{ city.humidity }}%</strong>
     </p>
     <p>
-      🍃 현재 풍속: <strong>{{ cityItem.windSpeed }}m/s</strong>
+      🍃 현재 풍속: <strong>{{ city.windSpeed }}m/s</strong>
     </p>
   </div>
 </template>

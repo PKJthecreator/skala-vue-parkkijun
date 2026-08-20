@@ -1,0 +1,56 @@
+/* 실습/과제 컴포넌트가 공통으로 쓰는 .practice-section 래퍼 스타일
+   (51개 컴포넌트가 이 클래스를 쓰지만 지금까지 어디에도 정의되어 있지 않았음) */
+div.practice-section {
+  padding: 10px 20px 20px 20px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+}
+
+.practice-section h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.practice-section hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #42b883, #35495e);
+  border-radius: 2px;
+  margin-bottom: 14px;
+}
+
+.practice-section button {
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  background-color: #f1f3f5;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.practice-section button:not(:disabled):hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  color: #212529;
+}
+
+.practice-section button:not(:disabled):active {
+  background-color: #dee2e6;
+  border-color: #6c757d;
+}
+
+.practice-section button:disabled {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+  color: #adb5bd;
+  cursor: not-allowed;
+}
