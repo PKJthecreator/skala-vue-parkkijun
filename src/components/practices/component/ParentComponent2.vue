@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import WeatherCard from './components/과제3/WeatherCard.vue'
+import WeatherCard from './ChildComponent2.vue'
 const selectedCityInfo = ref('카드를 클릭해 보세요.')
 // 자식이벤트 발생 시 이벤트 핸들러
 const receiveCitySignal = (cityName) => {

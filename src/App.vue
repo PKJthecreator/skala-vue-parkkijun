@@ -36,6 +36,7 @@ import WeatherComposition from './components/practices/composition/과제2/Weath
 import LifecycleParent from './components/practices/component/LifecycleParent.vue'
 import PropsEmitsParent from './components/practices/component/PropsEmitsParent.vue'
 import ParentComponent1 from './components/practices/component/ParentComponent1.vue'
+import ParentComponent2 from './components/practices/component/ParentComponent2.vue'
 import SlotDefaultParent from './components/practices/component/SlotDefaultParent.vue'
 import SlotNamedParent from './components/practices/component/SlotNamedParent.vue'
 import SlotScopedParent from './components/practices/component/SlotScopedparent.vue'
@@ -130,6 +131,8 @@ import WeatherParent from './components/practices/component/과제3/WeatherParen
     <hr />
     <PropsEmitsParent />
     <ParentComponent1 />
+    <hr />
+    <ParentComponent2 />
     <hr />
     <SlotDefaultParent />
     <hr />
