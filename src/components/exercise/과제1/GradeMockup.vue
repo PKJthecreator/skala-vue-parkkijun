@@ -35,23 +35,13 @@ const showDetail = (course) => {
 
       <div class="search-box">
         <label class="search-label">🔍 과목 검색</label>
-        <input
-          type="text"
-          :value="searchCourse"
-          @input="searchCourse = $event.target.value"
-          placeholder="검색할 과목 이름 입력"
-        />
+        <input type="text" :value="searchCourse" @input="searchCourse = $event.target.value" placeholder="검색할 과목 이름 입력" />
         <p class="search-hint">검색 중인 과목: {{ searchCourse || '전체' }}</p>
       </div>
 
       <h3 class="section-title">📚 수강 과목 성적 현황</h3>
       <div class="course-cards">
-        <div
-          v-for="course in courseList.filter((c) => c.name.includes(searchCourse))"
-          :key="course.id"
-          class="course-card"
-          @click="selectedCourse = course.name"
-        >
+        <div v-for="course in courseList.filter((c) => c.name.includes(searchCourse))" :key="course.id" class="course-card" @click="selectedCourse = course.name">
           <div class="course-info">
             <p class="course-name">{{ course.name }}</p>
             <p class="course-score">점수: {{ course.score }}점</p>
@@ -64,11 +54,7 @@ const showDetail = (course) => {
             </span>
 
             <div class="score-bar-track">
-              <div
-                class="score-bar-fill"
-                :class="gradeClass(course.score)"
-                :style="{ width: course.score + '%' }"
-              ></div>
+              <div class="score-bar-fill" :class="gradeClass(course.score)" :style="{ width: course.score + '%' }"></div>
             </div>
           </div>
 

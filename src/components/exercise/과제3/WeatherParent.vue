@@ -20,9 +20,7 @@ const selectedCityInfo = ref(null)
 const isFahrenheit = ref(false)
 
 // ── 2. 검색 도시 (computed 활용) ─────────────────────────────────────
-const filteredWeatherList = computed(() =>
-  weatherList.value.filter((city) => city.name.includes(searchQuery.value)),
-)
+const filteredWeatherList = computed(() => weatherList.value.filter((city) => city.name.includes(searchQuery.value)))
 
 const toFahrenheit = (celsius) => Math.round((celsius * 9) / 5 + 32)
 
@@ -84,17 +82,9 @@ const showDetail = (city) => {
       </BaseDashboardCard>
 
       <BaseDashboardCard icon="🗺️" :title="listTitle">
-        <p v-if="displayWeatherList.length === 0" class="empty-message">
-          😢 검색 결과와 일치하는 도시가 없습니다.
-        </p>
+        <p v-if="displayWeatherList.length === 0" class="empty-message">😢 검색 결과와 일치하는 도시가 없습니다.</p>
         <div v-else class="weather-cards">
-          <WeatherCard
-            v-for="city in displayWeatherList"
-            :key="city.id"
-            :city="city"
-            @select-card="selectCity"
-            @click-detail="showDetail"
-          />
+          <WeatherCard v-for="city in displayWeatherList" :key="city.id" :city="city" @select-card="selectCity" @click-detail="showDetail" />
         </div>
       </BaseDashboardCard>
 
@@ -103,10 +93,7 @@ const showDetail = (city) => {
       <div class="monitor">
         <h3>👁️‍🗨️ watch / watchEffect 모니터링 시스템</h3>
         <p>selectedCityInfo와 searchQuery가 바뀔 때마다 콘솔(F12)에 로그가 찍힙니다.</p>
-        <small style="color: gray">
-          watch → 상태바 문구 변경 감지 / watchEffect → 검색어 입력 자동 추적 / 자체 watch →
-          온도 단위 변경 감지
-        </small>
+        <small style="color: gray"> watch → 상태바 문구 변경 감지 / watchEffect → 검색어 입력 자동 추적 / 자체 watch → 온도 단위 변경 감지 </small>
       </div>
     </div>
   </div>

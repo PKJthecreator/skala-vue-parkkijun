@@ -28,14 +28,26 @@ onMounted(() => {
     <h2>📡 지역별 상세 기상 관측 정보</h2>
 
     <div v-if="selectedCity" class="detail-card">
-      <p>📍 지정 지역: <strong>{{ selectedCity.fullLocation }}</strong></p>
-      <p>🌡️ 실시간 기온: <strong>{{ selectedCity.temp }}°C</strong></p>
-      <p>☁️ 기상 현황: <strong>{{ selectedCity.status }}</strong></p>
-      <p>💧 대기 습도: <strong>{{ selectedCity.humidity }}%</strong></p>
-      <p>🍃 현재 풍속: <strong>{{ selectedCity.windSpeed }}m/s</strong></p>
+      <p>
+        📍 지정 지역: <strong>{{ selectedCity.fullLocation }}</strong>
+      </p>
+      <p>
+        🌡️ 실시간 기온: <strong>{{ selectedCity.temp }}°C</strong>
+      </p>
+      <p>
+        ☁️ 기상 현황: <strong>{{ selectedCity.status }}</strong>
+      </p>
+      <p>
+        💧 대기 습도: <strong>{{ selectedCity.humidity }}%</strong>
+      </p>
+      <p>
+        🍃 현재 풍속: <strong>{{ selectedCity.windSpeed }}m/s</strong>
+      </p>
     </div>
     <div v-else class="detail-card">
-      <p>❌ 존재하지 않는 도시 코드입니다: <strong>{{ route.params.cityId }}</strong></p>
+      <p>
+        ❌ 존재하지 않는 도시 코드입니다: <strong>{{ route.params.cityId }}</strong>
+      </p>
     </div>
 
     <!-- HTML <a> 태그 금지: RouterLink 사용 (SPA 새로고침 방지, 반응형 상태 보존) -->

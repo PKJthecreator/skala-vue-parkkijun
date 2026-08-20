@@ -14,12 +14,7 @@ const emit = defineEmits(['update-query'])
 <template>
   <div class="search-bar">
     <label class="search-label">🔍 도시 검색</label>
-    <input
-      type="text"
-      :value="query"
-      @input="emit('update-query', $event.target.value)"
-      placeholder="도시 이름을 한글로 입력하세요"
-    />
+    <input type="text" :value="query" @input="emit('update-query', $event.target.value)" placeholder="도시 이름을 한글로 입력하세요" />
     <p class="search-hint">검색 중인 도시: {{ query || '전체' }}</p>
   </div>
 </template>

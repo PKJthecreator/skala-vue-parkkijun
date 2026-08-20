@@ -23,23 +23,13 @@ const showDetail = (cityName, status) => {
 
       <div class="search-box">
         <label class="search-label">🔍 도시 검색</label>
-        <input
-          type="text"
-          :value="searchCity"
-          @input="searchCity = $event.target.value"
-          placeholder="도시 이름을 한글로 입력하세요"
-        />
+        <input type="text" :value="searchCity" @input="searchCity = $event.target.value" placeholder="도시 이름을 한글로 입력하세요" />
         <p class="search-hint">검색 중인 도시: {{ searchCity || '전체' }}</p>
       </div>
 
       <h3 class="section-title">🗺️ 지역별 날씨 현황</h3>
       <div class="weather-cards">
-        <div
-          v-for="city in weatherList"
-          :key="city.id"
-          class="weather-card"
-          @click="selectedCity = city.name"
-        >
+        <div v-for="city in weatherList" :key="city.id" class="weather-card" @click="selectedCity = city.name">
           <div class="city-info">
             <p class="city-name">{{ city.name }} ({{ city.status }})</p>
             <p class="city-temp">현재 기온: {{ city.temp }}°C</p>
@@ -47,9 +37,7 @@ const showDetail = (cityName, status) => {
             <span v-else-if="city.temp < 25" class="badge badge-cool">❄️ 선선함 (25도미만)</span>
             <span v-else class="badge badge-normal">🙂 보통 (26~34)</span>
           </div>
-          <button class="detail-btn" @click.stop="showDetail(city.name, city.status)">
-            상세보기
-          </button>
+          <button class="detail-btn" @click.stop="showDetail(city.name, city.status)">상세보기</button>
         </div>
       </div>
 

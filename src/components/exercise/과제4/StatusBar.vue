@@ -10,11 +10,7 @@ defineProps({
 
 <template>
   <div class="status-bar">
-    {{
-      selectedCity
-        ? `${selectedCity.name}이 선택되었습니다. (${selectedCity.status} / ${selectedCity.temp}°C)`
-        : '카드를 클릭하거나 검색해 보세요.'
-    }}
+    {{ selectedCity ? `${selectedCity.name}이 선택되었습니다. (${selectedCity.status} / ${selectedCity.temp}°C)` : '카드를 클릭하거나 검색해 보세요.' }}
   </div>
 </template>
 

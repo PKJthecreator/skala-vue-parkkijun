@@ -12,9 +12,7 @@ const emit = defineEmits(['toggle-unit'])
 </script>
 
 <template>
-  <button class="unit-toggle-btn" @click="emit('toggle-unit')">
-    🌡️ {{ isFahrenheit ? '화씨(°F)' : '섭씨(°C)' }} 로 보는 중 (클릭 시 전환)
-  </button>
+  <button class="unit-toggle-btn" @click="emit('toggle-unit')">🌡️ {{ isFahrenheit ? '화씨(°F)' : '섭씨(°C)' }} 로 보는 중 (클릭 시 전환)</button>
 </template>
 
 <style scoped>

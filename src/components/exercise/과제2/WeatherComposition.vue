@@ -20,9 +20,7 @@ const selectedCityInfo = ref(null)
 // 도시 이름에 searchQuery가 포함된 항목만 필터링
 // searchQuery가 빈 문자열이면 모든 도시가 includes('') === true 이므로
 // 자연스럽게 원본 weatherList 전체가 반환된다.
-const filteredWeatherList = computed(() =>
-  weatherList.value.filter((city) => city.name.includes(searchQuery.value)),
-)
+const filteredWeatherList = computed(() => weatherList.value.filter((city) => city.name.includes(searchQuery.value)))
 
 // ── 3. 반응형 변수 변화 감시 (요구사항 3) ─────────────────────────
 // 3-1) selectedCityInfo 감시 (watch): 상태바 문구가 바뀔 때마다 로그
@@ -76,16 +74,10 @@ const showDetail = (city) => {
 
       <div class="search-box">
         <label class="search-label">🔍 도시 검색</label>
-        <input
-          type="text"
-          v-model="searchQuery"
-          placeholder="도시 이름을 한글로 입력하세요"
-        />
+        <input type="text" v-model="searchQuery" placeholder="도시 이름을 한글로 입력하세요" />
         <p class="search-hint">검색 중인 도시: {{ searchQuery || '전체' }}</p>
 
-        <button class="unit-toggle-btn" @click="isFahrenheit = !isFahrenheit">
-          🌡️ {{ isFahrenheit ? '화씨(°F)' : '섭씨(°C)' }} 로 보는 중 (클릭 시 전환)
-        </button>
+        <button class="unit-toggle-btn" @click="isFahrenheit = !isFahrenheit">🌡️ {{ isFahrenheit ? '화씨(°F)' : '섭씨(°C)' }} 로 보는 중 (클릭 시 전환)</button>
       </div>
 
       <!-- 요구사항 4: 검색 결과 표시 -->
@@ -101,12 +93,7 @@ const showDetail = (city) => {
       </template>
 
       <div class="weather-cards" v-if="displayWeatherList.length > 0">
-        <div
-          v-for="city in displayWeatherList"
-          :key="city.id"
-          class="weather-card"
-          @click="selectCity(city)"
-        >
+        <div v-for="city in displayWeatherList" :key="city.id" class="weather-card" @click="selectCity(city)">
           <div class="city-info">
             <p class="city-name">{{ city.name }} ({{ city.status }})</p>
             <p class="city-temp">현재 기온: {{ city.displayTemp }}{{ city.unit }}</p>
@@ -119,20 +106,13 @@ const showDetail = (city) => {
       </div>
 
       <div class="status-bar">
-        {{
-          selectedCityInfo
-            ? `${selectedCityInfo.name}이 선택되었습니다. (${selectedCityInfo.status} / ${selectedCityInfo.temp}°C)`
-            : '카드를 클릭하거나 검색해 보세요.'
-        }}
+        {{ selectedCityInfo ? `${selectedCityInfo.name}이 선택되었습니다. (${selectedCityInfo.status} / ${selectedCityInfo.temp}°C)` : '카드를 클릭하거나 검색해 보세요.' }}
       </div>
 
       <div class="monitor">
         <h3>👁️‍🗨️ watch / watchEffect 모니터링 시스템</h3>
         <p>selectedCityInfo와 searchQuery가 바뀔 때마다 콘솔(F12)에 로그가 찍힙니다.</p>
-        <small style="color: gray">
-          watch → 상태바 문구 변경 감지 / watchEffect → 검색어 입력 자동 추적 / 자체 watch →
-          온도 단위 변경 감지
-        </small>
+        <small style="color: gray"> watch → 상태바 문구 변경 감지 / watchEffect → 검색어 입력 자동 추적 / 자체 watch → 온도 단위 변경 감지 </small>
       </div>
     </div>
   </div>

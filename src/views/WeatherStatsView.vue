@@ -14,13 +14,9 @@ const averageTemp = computed(() => {
   return Math.round((sum / weatherList.value.length) * 10) / 10
 })
 
-const hottestCity = computed(() =>
-  weatherList.value.reduce((max, city) => (city.temp > max.temp ? city : max)),
-)
+const hottestCity = computed(() => weatherList.value.reduce((max, city) => (city.temp > max.temp ? city : max)))
 
-const coolestCity = computed(() =>
-  weatherList.value.reduce((min, city) => (city.temp < min.temp ? city : min)),
-)
+const coolestCity = computed(() => weatherList.value.reduce((min, city) => (city.temp < min.temp ? city : min)))
 </script>
 
 <template>

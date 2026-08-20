@@ -41,6 +41,12 @@ import SlotDefaultParent from './components/practices/component/SlotDefaultParen
 import SlotNamedParent from './components/practices/component/SlotNamedParent.vue'
 import SlotScopedParent from './components/practices/component/SlotScopedparent.vue'
 import WeatherParent from './components/exercise/과제3/WeatherParent.vue'
+import StoreCounter from './components/practices/library/StoreCounter.vue'
+import AxiosWeather from './components/practices/library/AxiosWeather.vue'
+import AxiosJson from './components/practices/library/AxiosJson.vue'
+import ElementPlus from './components/practices/library/ElementPlus.vue'
+import WeatherStoreDashboard from './components/exercise/과제5/WeatherStoreDashboard.vue'
+import WeatherAppDashboard from './components/exercise/과제6/WeatherAppDashboard.vue'
 </script>
 
 <template>
@@ -156,6 +162,29 @@ import WeatherParent from './components/exercise/과제3/WeatherParent.vue'
       </nav>
       <RouterView />
     </section>
+
+    <hr />
+    <StoreCounter />
+
+    <section class="assignment-block">
+      <h1 class="assignment-title">과제5: 날씨 Store (Pinia)</h1>
+      <hr class="assignment-divider" />
+      <WeatherStoreDashboard />
+    </section>
+
+    <hr />
+    <AxiosWeather />
+    <hr />
+    <AxiosJson />
+
+    <section class="assignment-block">
+      <h1 class="assignment-title">과제6: 실전 날씨 애플리케이션 (OpenWeatherMap API)</h1>
+      <hr class="assignment-divider" />
+      <WeatherAppDashboard />
+    </section>
+
+    <hr />
+    <ElementPlus />
   </div>
 </template>
 

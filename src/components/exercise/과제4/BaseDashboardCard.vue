@@ -13,7 +13,9 @@ defineProps({
 
 <template>
   <div class="dashboard-card">
-    <h3 class="card-title"><span v-if="icon">{{ icon }}</span> {{ title }}</h3>
+    <h3 class="card-title">
+      <span v-if="icon">{{ icon }}</span> {{ title }}
+    </h3>
     <slot></slot>
   </div>
 </template>
