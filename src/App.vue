@@ -32,6 +32,7 @@ import WatchersDeep from './components/practices/composition/WatchersDeep.vue'
 import WatchersMulti from './components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from './components/practices/composition/WatchersReactive.vue'
 import WatchersWatchEffect from './components/practices/composition/WatchersWatchEffect.vue'
+import WeatherComposition from './components/practices/composition/과제2/WeatherComposition.vue'
 </script>
 
 <template>
@@ -110,6 +111,12 @@ import WatchersWatchEffect from './components/practices/composition/WatchersWatc
     <WatchersReactive />
     <hr />
     <WatchersWatchEffect />
+
+    <section class="assignment-block">
+      <h1 class="assignment-title">과제2: 날씨 Composition API</h1>
+      <hr class="assignment-divider" />
+      <WeatherComposition />
+    </section>
   </div>
 </template>
 
