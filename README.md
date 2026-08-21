@@ -195,22 +195,45 @@ cp .env.example .env
 `.env`(실제 API 키)만 git에서 제외되고, 비밀값이 없는 `.env.staging` / `.env.production`은
 실습 재현을 위해 커밋한다.
 
-### Vercel 배포
+### GitHub Pages 배포
 
-정적 호스팅에서 SPA를 서비스할 때 걸리는 문제가 하나 있다. 이 앱은 Vue Router를
-`createWebHistory`(History 모드)로 쓰기 때문에, `/about`이나 `/weather/city_01` 주소로 **직접
-접속하거나 새로고침하면** 서버가 그 경로의 실제 파일을 찾다가 404를 낸다. 그래서 모든 경로를
-`index.html`로 넘겨주는 fallback 설정이 필요하다 — [vercel.json](vercel.json)의 `rewrites`가
-그 역할을 한다.
+정적 호스팅에서 이 앱을 서비스할 때 걸리는 문제가 두 가지 있다. 강의 자료는 "dist 폴더를
+호스팅에 올리면 된다"까지만 다루지만, 실제로는 아래 처리가 필요하다.
 
-1. GitHub 저장소를 Vercel에 import한다 (Framework Preset: Vite 자동 인식).
-2. **Settings → Environment Variables** 에 `VITE_OPENWEATHER_API_KEY`를 등록한다.
-   `.env`는 커밋되지 않으므로 이 등록을 빠뜨리면 날씨 조회가 전부 실패한다.
-3. Deploy 후 `/weather/city_01`로 **직접 접속**해서 404가 아닌지 확인한다.
+**문제 1 — 자산 경로.** 프로젝트 사이트는 `pkjthecreator.github.io/저장소명/` 하위 경로로
+서비스되는데, Vite의 기본 `base`는 `/`라서 js/css 요청이 전부 404가 난다.
+→ [vite.config.js](vite.config.js)에서 Actions가 주는 `GITHUB_REPOSITORY`로 `base`를 자동
+계산한다. 저장소 이름을 바꿔도 따라오고, 사용자 사이트(`*.github.io` 저장소)면 `/`를 쓴다.
 
-> GitHub Pages에 올릴 경우에는 프로젝트 사이트가 `/저장소명/` 하위 경로라서
-> `vite.config.js`에 `base: '/저장소명/'`을 추가해야 한다. 라우터는 이미
-> `createWebHistory(import.meta.env.BASE_URL)`로 되어 있어 `base`만 넣으면 따라온다.
+**문제 2 — 새로고침 404.** Vue Router를 History 모드(`createWebHistory`)로 쓰기 때문에
+`/about`이나 `/weather/city_01`로 **직접 접속하거나 새로고침하면** 서버가 그 경로의 실제
+파일을 찾다가 404를 낸다.
+→ GitHub Pages는 못 찾은 요청에 `404.html`을 돌려주므로, 빌드 후 `index.html`을 `404.html`로
+복사해 두면 그 요청도 SPA가 받아 라우터가 처리한다. `vite.config.js`의 `spa-fallback-404`
+플러그인이 매 빌드마다 자동으로 복사한다.
+
+#### 설정 순서
+
+1. 저장소 **Settings → Secrets and variables → Actions → New repository secret** 에서
+   `VITE_OPENWEATHER_API_KEY`를 등록한다. `.env`는 커밋되지 않으므로 이걸 빠뜨리면 빌드는
+   성공하지만 날씨 조회가 전부 실패한다.
+2. 저장소 **Settings → Pages → Build and deployment → Source** 를 **GitHub Actions** 로 바꾼다.
+   (기본값인 "Deploy from a branch"가 아니다.)
+3. `main`에 push하면 [.github/workflows/deploy.yml](.github/workflows/deploy.yml)이 돌면서
+   `npm ci` → ESLint 검사 → 빌드 → 배포까지 진행한다.
+4. Actions 탭에서 완료를 확인하고 `https://pkjthecreator.github.io/저장소명/` 으로 접속한다.
+
+워크플로에 `npx eslint .`를 게이트로 넣어, 정적 검사를 통과하지 못한 코드가 배포되지 않게 했다
+(강의 자료 p.253의 CI/CD 자동 검수에 해당).
+
+#### 배포 후 확인
+
+- 주소 뒤에 `/weather/city_01`을 **직접 입력**해서 접속 → 404가 아니라 상세 페이지가 떠야 한다
+  (SPA fallback 동작 확인)
+- 과제6 섹션에서 실제 날씨가 뜨는지 → 뜨지 않으면 Secret 등록이나 API 키 활성화를 확인한다
+
+> Vercel에 올릴 경우를 위해 [vercel.json](vercel.json)도 함께 두었다. Vercel은 루트로
+> 서비스되므로 `base` 조정이 필요 없고, `rewrites` 한 줄이 SPA fallback을 대신한다.
 
 ### API 키에 대한 주의
 

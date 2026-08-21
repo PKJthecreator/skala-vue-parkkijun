@@ -1,0 +1,56 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Actions 탭에서 수동 실행도 가능하게 한다
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포가 겹치지 않도록 한 번에 하나만 진행한다
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 의존성 설치
+        run: npm ci
+
+      # 강의 자료(p.253)의 "정적 검사를 통과하지 못한 코드가 배포되는 프로세스를
+      # 자동 차단한다"에 해당하는 단계. --fix 없이 검사만 해서 게이트 역할을 시킨다.
+      - name: ESLint 검사
+        run: npx eslint .
+
+      - name: 빌드
+        run: npm run build
+        env:
+          GITHUB_PAGES: 'true' # vite.config.js가 base를 /저장소명/으로 계산하게 한다
+          # .env는 커밋되지 않으므로 키는 저장소 Secret에서 주입한다
+          VITE_OPENWEATHER_API_KEY: ${{ secrets.VITE_OPENWEATHER_API_KEY }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
