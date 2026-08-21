@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production",
     "preview": "vite preview",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint . --fix",
@@ -14,6 +15,7 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
     "axios": "^1.19.0",
     "element-plus": "^2.14.4",
     "pinia": "^3.0.4",

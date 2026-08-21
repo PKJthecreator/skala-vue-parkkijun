@@ -42,3 +42,6 @@ __screenshots__/
 .env
 .env.*
 !.env.example
+# 아래 둘은 비밀값이 없고(VITE_API_URL만 존재) 강의 Code Challenge 재현에 필요하므로 커밋한다
+!.env.staging
+!.env.production

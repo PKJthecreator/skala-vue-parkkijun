@@ -31,6 +31,8 @@ import WatchersBasic from './components/practices/composition/WatchersBasic.vue'
 import WatchersDeep from './components/practices/composition/WatchersDeep.vue'
 import WatchersMulti from './components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from './components/practices/composition/WatchersReactive.vue'
+import WatchersRefArray from './components/practices/composition/WatchersRefArray.vue'
+import WatchersReactiveArray from './components/practices/composition/WatchersReactiveArray.vue'
 import WatchersWatchEffect from './components/practices/composition/WatchersWatchEffect.vue'
 import WeatherComposition from './components/exercise/과제2/WeatherComposition.vue'
 import LifecycleParent from './components/practices/component/LifecycleParent.vue'
@@ -39,12 +41,14 @@ import ParentComponent1 from './components/practices/component/ParentComponent1.
 import ParentComponent2 from './components/practices/component/ParentComponent2.vue'
 import SlotDefaultParent from './components/practices/component/SlotDefaultParent.vue'
 import SlotNamedParent from './components/practices/component/SlotNamedParent.vue'
-import SlotScopedParent from './components/practices/component/SlotScopedparent.vue'
+import SlotScopedParent from './components/practices/component/SlotScopedParent.vue'
 import WeatherParent from './components/exercise/과제3/WeatherParent.vue'
 import StoreCounter from './components/practices/library/StoreCounter.vue'
 import AxiosWeather from './components/practices/library/AxiosWeather.vue'
 import AxiosJson from './components/practices/library/AxiosJson.vue'
 import ElementPlus from './components/practices/library/ElementPlus.vue'
+import EcmaScript from './components/practices/library/EcmaScript.vue'
+import EnvVariables from './components/practices/library/EnvVariables.vue'
 import WeatherStoreDashboard from './components/exercise/과제5/WeatherStoreDashboard.vue'
 import WeatherAppDashboard from './components/exercise/과제6/WeatherAppDashboard.vue'
 </script>
@@ -124,6 +128,10 @@ import WeatherAppDashboard from './components/exercise/과제6/WeatherAppDashboa
     <hr />
     <WatchersReactive />
     <hr />
+    <WatchersRefArray />
+    <hr />
+    <WatchersReactiveArray />
+    <hr />
     <WatchersWatchEffect />
 
     <section class="assignment-block">
@@ -185,6 +193,10 @@ import WeatherAppDashboard from './components/exercise/과제6/WeatherAppDashboa
 
     <hr />
     <ElementPlus />
+    <hr />
+    <EcmaScript />
+    <hr />
+    <EnvVariables />
   </div>
 </template>
 

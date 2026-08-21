@@ -7,7 +7,7 @@
 3. 기타 외부 API를 추가하여 Application 기능을 확장한다.
 
 사용자가 이미 axios 설치 및 OpenWeatherMap 가입/키 발급을 완료한 상태로 아래 정보를 전달함:
-- API Key: `REDACTED_API_KEY`
+- API Key: `.env`의 `VITE_OPENWEATHER_API_KEY`로 관리 (git 미추적, `.env.example` 참고)
 - Current Weather Data: `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}`
 
 ## 참고한 기존 파일 (설계/패턴 근거)
@@ -30,7 +30,9 @@
 
 ## 보안 관련 메모
 
-OpenWeatherMap API 키가 프론트엔드 코드(`CitySearch.vue`, `CurrentWeatherCard.vue`)에 그대로 하드코딩되어 있다 (기존 `AxiosWeather.vue`도 동일한 방식). 실습 목적이라 그대로 두었지만, 이 레포를 public으로 전환하거나 실서비스로 배포할 경우 키가 노출되므로 이후엔 `.env` + 서버 프록시로 옮기는 것을 권장한다.
+OpenWeatherMap API 키는 `CitySearch.vue`, `CurrentWeatherCard.vue`, `AxiosWeather.vue` 모두 `import.meta.env.VITE_OPENWEATHER_API_KEY`로 읽는다. 실제 값은 git에 추적되지 않는 `.env`에만 있고, 레포에는 빈 `.env.example`만 커밋되어 있다 (교수님 원본 `AxiosWeather.vue`는 키가 소스에 하드코딩되어 있었음).
+
+다만 `VITE_` 접두사가 붙은 값은 빌드 시 번들에 그대로 인라인되므로, 배포된 정적 파일에서는 여전히 키를 볼 수 있다. 실습 범위에서는 충분하지만 실서비스라면 서버 프록시를 두어야 한다.
 
 ## 검증
 

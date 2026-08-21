@@ -1,6 +1,9 @@
 <script setup>
 // 과제6-요구사항3: OpenWeatherMap이 아닌 별도의 외부 API(REST Countries)를 추가해 기능 확장
 // https://restcountries.com/v3.1/alpha/{countryCode}
+//
+// UI Library 과제: 직접 짜던 카드 마크업을 Element Plus 컴포넌트
+// (el-card, el-descriptions, el-skeleton, el-tag)로 교체했다.
 import { ref, watch } from 'vue'
 import axios from 'axios'
 
@@ -35,56 +38,44 @@ watch(() => props.countryCode, fetchCountry, { immediate: true })
 </script>
 
 <template>
-  <div v-if="countryData" class="country-card">
-    <p class="country-title">
-      <span class="flag">{{ countryData.flag }}</span>
-      <strong>{{ countryData.name.common }}</strong>
-      <span class="native-name">({{ countryData.name.official }})</span>
-    </p>
-    <p>
-      🏛️ 수도: <strong>{{ countryData.capital?.[0] ?? '정보 없음' }}</strong>
-    </p>
-    <p>
-      👥 인구: <strong>{{ countryData.population.toLocaleString() }}명</strong>
-    </p>
-    <p>
-      🌏 지역: <strong>{{ countryData.region }} ({{ countryData.subregion }})</strong>
-    </p>
-    <p>
-      💰 통화:
-      <strong>{{
-        Object.values(countryData.currencies ?? {})
-          .map((c) => c.name)
-          .join(', ') || '정보 없음'
-      }}</strong>
-    </p>
-  </div>
-  <p v-else-if="isLoading">⏳ 국가 정보를 불러오는 중...</p>
+  <el-card v-if="isLoading || countryData" class="country-card" shadow="never">
+    <template #header>
+      <div class="card-header">
+        <span class="flag">{{ countryData?.flag }}</span>
+        <strong>{{ countryData?.name.common }}</strong>
+        <el-tag v-if="countryData" size="small" type="warning" effect="plain">{{ countryData.name.official }}</el-tag>
+      </div>
+    </template>
+
+    <el-skeleton v-if="isLoading" :rows="4" animated />
+
+    <el-descriptions v-else :column="1" border>
+      <el-descriptions-item label="🏛️ 수도">{{ countryData.capital?.[0] ?? '정보 없음' }}</el-descriptions-item>
+      <el-descriptions-item label="👥 인구">{{ countryData.population.toLocaleString() }}명</el-descriptions-item>
+      <el-descriptions-item label="🌏 지역">{{ countryData.region }} ({{ countryData.subregion }})</el-descriptions-item>
+      <el-descriptions-item label="💰 통화">
+        {{
+          Object.values(countryData.currencies ?? {})
+            .map((c) => c.name)
+            .join(', ') || '정보 없음'
+        }}
+      </el-descriptions-item>
+    </el-descriptions>
+  </el-card>
 </template>
 
 <style scoped>
 .country-card {
-  margin-top: 12px;
-  background: #fffbeb;
-  border: 1px solid #fde68a;
-  border-radius: 8px;
-  padding: 15px;
-  line-height: 1.8;
+  margin-top: 14px;
 }
 
-.country-title {
+.card-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.1rem;
 }
 
 .flag {
   font-size: 1.6rem;
-}
-
-.native-name {
-  color: #92400e;
-  font-size: 0.85rem;
 }
 </style>

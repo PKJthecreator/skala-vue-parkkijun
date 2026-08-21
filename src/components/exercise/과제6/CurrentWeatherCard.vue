@@ -1,8 +1,12 @@
 <script setup>
 // 과제6-요구사항1: OpenWeatherMap Current Weather API로 실제 날씨 데이터 연동
 // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+//
+// UI Library 과제: 직접 짜던 카드/로딩 문구 마크업을 Element Plus 컴포넌트
+// (el-card, el-skeleton, el-descriptions, el-empty, ElMessage)로 교체했다.
 import { ref, watch } from 'vue'
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 import { useConfigStore } from '@/stores/configStore.js'
 
 // API 키는 코드에 하드코딩하지 않고 .env(git 미추적)의 환경 변수로 관리한다.
@@ -42,7 +46,7 @@ const fetchWeather = async () => {
     emit('weather-loaded', response.data)
   } catch (error) {
     console.error('Current Weather API 통신 중 에러가 발생했습니다:', error)
-    alert('날씨 데이터를 가져오지 못했습니다. API 키 활성화 여부를 확인하세요.')
+    ElMessage.error('날씨 데이터를 가져오지 못했습니다. API 키 활성화 여부를 확인하세요.')
   } finally {
     isLoading.value = false
   }
@@ -54,51 +58,51 @@ watch(() => configStore.unit, fetchWeather)
 </script>
 
 <template>
-  <div class="current-weather">
-    <p v-if="isLoading">⏳ 날씨 데이터를 불러오는 중...</p>
-    <div v-else-if="weatherData" class="result-card">
-      <p class="location-name">
-        📍 <strong>{{ location.name }}</strong>
-        <img v-if="weatherData.weather[0]" class="weather-icon" :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" :alt="weatherData.weather[0].description" />
-      </p>
-      <p>
-        🌡️ 현재 기온: <strong>{{ Math.round(weatherData.main.temp) }}{{ configStore.unitSymbol }}</strong> (체감 {{ Math.round(weatherData.main.feels_like) }}{{ configStore.unitSymbol }})
-      </p>
-      <p>
-        ☁️ 날씨 상태: <strong>{{ weatherData.weather[0].description }}</strong>
-      </p>
-      <p>
-        💧 습도: <strong>{{ weatherData.main.humidity }}%</strong>
-      </p>
-      <p>
-        🍃 풍속: <strong>{{ weatherData.wind.speed }}m/s</strong>
-      </p>
-    </div>
-    <p v-else>도시를 검색해서 선택하면 실시간 날씨를 보여줍니다.</p>
-  </div>
+  <el-card class="current-weather" shadow="never">
+    <template #header>
+      <div class="card-header">
+        <span class="location-name">📍 {{ location?.name ?? '도시 미선택' }}</span>
+        <img v-if="weatherData?.weather?.[0]" class="weather-icon" :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" :alt="weatherData.weather[0].description" />
+      </div>
+    </template>
+
+    <!-- 로딩 문구 대신 Element Plus 스켈레톤으로 실제 카드 형태를 미리 보여준다 -->
+    <el-skeleton v-if="isLoading" :rows="4" animated />
+
+    <el-descriptions v-else-if="weatherData" :column="1" border size="large">
+      <el-descriptions-item label="🌡️ 현재 기온">
+        <el-tag type="danger" effect="dark" size="large">{{ Math.round(weatherData.main.temp) }}{{ configStore.unitSymbol }}</el-tag>
+        <span class="feels-like">체감 {{ Math.round(weatherData.main.feels_like) }}{{ configStore.unitSymbol }}</span>
+      </el-descriptions-item>
+      <el-descriptions-item label="☁️ 날씨 상태">{{ weatherData.weather[0].description }}</el-descriptions-item>
+      <el-descriptions-item label="💧 습도">{{ weatherData.main.humidity }}%</el-descriptions-item>
+      <el-descriptions-item label="🍃 풍속">{{ weatherData.wind.speed }}m/s</el-descriptions-item>
+    </el-descriptions>
+
+    <el-empty v-else description="도시를 검색해서 선택하면 실시간 날씨를 보여줍니다." :image-size="80" />
+  </el-card>
 </template>
 
 <style scoped>
-.result-card {
-  background: #f8fafc;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  line-height: 1.8;
-}
-
-.result-card strong {
-  color: #0284c7;
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .location-name {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .weather-icon {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+}
+
+.feels-like {
+  margin-left: 10px;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 </style>
