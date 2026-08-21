@@ -76,7 +76,7 @@ watch(() => configStore.unit, fetchWeather)
       </el-descriptions-item>
       <el-descriptions-item label="☁️ 날씨 상태">{{ weatherData.weather[0].description }}</el-descriptions-item>
       <el-descriptions-item label="💧 습도">{{ weatherData.main.humidity }}%</el-descriptions-item>
-      <el-descriptions-item label="🍃 풍속">{{ weatherData.wind.speed }}m/s</el-descriptions-item>
+      <el-descriptions-item label="🍃 풍속">{{ weatherData.wind.speed }}{{ configStore.unit === 'fahrenheit' ? 'mph' : 'm/s' }}</el-descriptions-item>
     </el-descriptions>
 
     <el-empty v-else description="도시를 검색해서 선택하면 실시간 날씨를 보여줍니다." :image-size="80" />

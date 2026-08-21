@@ -141,9 +141,9 @@ npm run lint
   **[CitySearch.vue](src/components/exercise/과제6/CitySearch.vue)** 가 Geocoding API(`/geo/1.0/direct`)로
   영문 도시명을 위경도로 변환. 하드코딩된 좌표 대신 원하는 도시를 검색해 조회할 수 있게 확장
 - **요구사항3 — 기타 외부 API 추가**:
-  **[CountryInfoCard.vue](src/components/exercise/과제6/CountryInfoCard.vue)** 가 REST Countries
-  API(`https://restcountries.com/v3.1/alpha/{code}`, 키 불필요)를 호출. 날씨 응답의
-  `sys.country` 국가 코드를 받아 국기/수도/인구/통화를 표시
+  **[CountryInfoCard.vue](src/components/exercise/과제6/CountryInfoCard.vue)** 가 World Bank
+  API(`https://api.worldbank.org/v2/country/{code}`, 키 불필요)를 호출. 날씨 응답의
+  `sys.country` 국가 코드를 받아 국가명/수도/지역/소득 수준과 최신 인구를 표시
 - **본인 추가**: **[WeatherAppDashboard.vue](src/components/exercise/과제6/WeatherAppDashboard.vue)** 가
   세 API를 조합하는 부모 역할을 하며, 과제5의 `UnitToggler`/`configStore`를 그대로 재사용해
   실제 API 데이터에도 단위 전환이 적용되도록 연결 (과제 간 스토어 재사용 데모)

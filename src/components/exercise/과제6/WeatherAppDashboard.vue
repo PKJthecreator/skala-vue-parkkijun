@@ -8,8 +8,8 @@ import CitySearch from './CitySearch.vue'
 import CurrentWeatherCard from './CurrentWeatherCard.vue'
 import CountryInfoCard from './CountryInfoCard.vue'
 
-// 요구사항1: 기본값으로 서울의 실제 날씨를 곧바로 보여준다 (AxiosWeather.vue의 좌표 재사용)
-const selectedLocation = ref({ name: '서울', lat: 35.158582, lon: 126.804975 })
+// 요구사항1: 기본값으로 서울의 실제 날씨를 곧바로 보여준다.
+const selectedLocation = ref({ name: '서울', lat: 37.5666791, lon: 126.9782914 })
 const countryCode = ref(null)
 
 const selectLocation = (location) => {
@@ -38,7 +38,7 @@ const onWeatherLoaded = (data) => {
         <ul>
           <li>OpenWeatherMap Current Weather API — 위경도 기반 실시간 날씨 조회 (요구사항1)</li>
           <li>OpenWeatherMap Geocoding API — 도시 이름 검색 → 위경도 변환 (요구사항2)</li>
-          <li>REST Countries API — 날씨 응답의 국가 코드로 국가 정보 조회 (요구사항3, OpenWeatherMap 외부 API)</li>
+          <li>World Bank API — 날씨 응답의 국가 코드로 국가 정보와 최신 인구 조회 (요구사항3, OpenWeatherMap 외부 API)</li>
           <li>UI: Element Plus (el-input / el-card / el-descriptions / el-skeleton / el-tag / ElMessage)</li>
         </ul>
       </el-alert>
